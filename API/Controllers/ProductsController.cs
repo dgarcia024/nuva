@@ -11,14 +11,14 @@ namespace API.Controllers
     public class ProductsController(StoreContext context) : ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<List<Product>>> GetProducts()
+        public async Task<ActionResult<List<Product>>> GetAll()
         {
             return await context.Products.ToListAsync();
         }
 
 
         [HttpGet("{Id}")]
-        public async Task<ActionResult<Product>> GetProduct(int Id)
+        public async Task<ActionResult<Product>> GetById(int Id)
         {
             var product = await context.Products.FindAsync(Id);
             if(product == null) return NotFound();
