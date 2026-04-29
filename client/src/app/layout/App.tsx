@@ -1,13 +1,12 @@
-import { useEffect, useState } from "react"
-import type { Product } from "../models/product";
-import Catalog from "../../features/catalog/Catalog";
+import { useState } from "react"
 import { Box, Container, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import NavBar from "./NavBar";
+import { Outlet } from "react-router-dom";
 
 
 
 function App() {
-  const [products, setProduct] = useState<Product[]>([]);
+
   const [darkMode, setDarkMode] = useState(false);
 
   const setMode = () => {
@@ -25,12 +24,6 @@ function App() {
     }
   })
 
-
-  useEffect(() => {
-    fetch('https://localhost:5001/api/products')
-      .then(response => response.json())
-      .then(data => setProduct(data))
-  }, [])
 
   // const addProduct = () => {
   //   setProduct(prevState => [...prevState,
@@ -59,11 +52,9 @@ function App() {
         py: 6
        }}>
         <Container maxWidth='xl' sx={{ mt: 8 }}>
-          <Catalog products={products} />
+          <Outlet />
         </Container>
       </Box>
-      {/* <Typography variant="h4">Restore</Typography>
-          <Button variant="contained" onClick={addProduct}>Add product</Button> */}
     </ThemeProvider>
   )
 }
